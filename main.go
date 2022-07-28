@@ -24,7 +24,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.Method != "GET" {
-		http.Error(w, "method is not supported", http.StatusNotFound)
+		http.Error(w, "method is not supported", http.StatusMethodNotAllowed)
 		return
 	}
 	fmt.Fprintf(w, "hello!")
@@ -36,7 +36,7 @@ func main() {
 	http.HandleFunc("/form", formHandler)
 	http.HandleFunc("/hello", helloHandler)
 
-	fmt.Printf("Starting server at port 8080\n")
+	fmt.Println("Starting server at port 8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
